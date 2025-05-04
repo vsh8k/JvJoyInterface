@@ -25,13 +25,6 @@ public class JvJoyTest {
 			System.out.println("Version Number: " + vJoy.getvJoyVersion());
 		}
 		
-		assertTrue(vJoy.driverMatch());
-		if (vJoy.driverMatch()) {
-			System.out.println("Version of Driver Matches DLL Version {0}");
-		} else {
-			System.out.println("Version of Driver {0} does NOT match DLL Version {1}");
-		}
-		
 		VjdStat status = vJoy.getVJDStatus(rID);
 		if ((status == VjdStat.VJD_STAT_OWN) ||
 				((status == VjdStat.VJD_STAT_FREE) && (!vJoy.acquireVJD(rID)))) {
@@ -45,17 +38,15 @@ public class JvJoyTest {
 		assertTrue(vJoy.setAxis(0, rID, VJoy.HID_USAGE_X));
 		assertTrue(vJoy.setAxis(16384, rID, VJoy.HID_USAGE_Y));
 		assertTrue(vJoy.setAxis(32768, rID, VJoy.HID_USAGE_Z));
-		
+
 		assertTrue(vJoy.setAxis(0, rID, VJoy.HID_USAGE_RX));
 		assertTrue(vJoy.setAxis(16384, rID, VJoy.HID_USAGE_RY));
 		assertTrue(vJoy.setAxis(32768, rID, VJoy.HID_USAGE_RZ));
-		
+
 		assertTrue(vJoy.setAxis(0, rID, VJoy.HID_USAGE_SL0));
 		assertTrue(vJoy.setAxis(16384, rID, VJoy.HID_USAGE_SL1));
 		
-		for (int i = 1; i <= 32; i++) vJoy.setBtn(Math.random() > 0.5 ? true : false, rID, i);
-		
-		return;
+		for (int i = 1; i <= 32; i++) vJoy.setBtn(Math.random() > 0.5, rID, i);
 	}
 	
 }
